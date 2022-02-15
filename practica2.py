@@ -5,6 +5,7 @@ Created on Tue Feb  8 19:23:53 2022
 @author: ander
 """
 import sys
+import random
 
 ############### HANGMAN GAME ###############
 ctgs = {'transportation':["car", "truck", "scooter", "bicycle", "taxi", "train", "tram", "subway", "airplane", "van"],
