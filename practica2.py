@@ -162,6 +162,8 @@ def modify_words():
         sel = delete_category()
         
     return print_menu()
+def Play:
+    
 
 def main():
     
