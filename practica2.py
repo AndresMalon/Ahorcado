@@ -165,7 +165,7 @@ def modify_words():
 def Play:
     print ("Playing...\n ")
     print("Please choose one of the following options: \n")
-    print("1 - The guessed word belongs to a certain category\n2 - Randomly from all bag of words\n)
+    print("1 - The guessed word belongs to a certain category\n2 - Randomly from all bag of words\n")
     print("\n")
     
 
