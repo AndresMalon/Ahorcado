@@ -96,6 +96,7 @@ def add_word():
     return print_modify_options()
 
 #remove word
+##
 def remove_word():
     c = input('Please introduce the category to be updated: ')
     
