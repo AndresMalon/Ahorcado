@@ -4,14 +4,13 @@ Created on Tue Feb  8 19:23:53 2022
 
 @author: ander
 """
-import sys
-import random
+import random,json
 
 ############### HANGMAN GAME ###############
-ctgs = {'transportation':["car", "truck", "scooter", "bicycle", "taxi", "train", "tram", "subway", "airplane", "van"],
-            'food':["rice", "chicken", "pizza", "pasta", "salad", "porridge", "cake", "muffin", "tuna", "ham"],
-            'cities':["Quebec City", "Los Angeles", "San Diego", "San Jose", "Ottawa", "Toronto", "Vancouver", "Edmonton", "Detroit", "Philadelphia", "Minneapolis"],
-            'nationalities':["Canadian", "German", "French", "Italian", "Swedish", "Chinese", "Indian", "Spanish", "Argentinian", "Chilean"]}
+
+with open('words.json') as f:
+    words = f.read()
+ctgs = json.loads(words)
 
 def intro():
     print("Welcome to the Hang Man Game!")
@@ -187,7 +186,7 @@ def Play:
     letterspos=dict()
     for l in  letters:
         
-def hangman(cont):
+def hangman(cont,s):
     a = '---------'
     b = '|';c = '|';d = '|';e = '|';f = '|'
     g = '_'
@@ -203,23 +202,26 @@ def hangman(cont):
     if cont >= 5:
         f = '|      / \\'
     
-    print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(a,b,c,d,e,f,g))    
+    print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s\n'%(a,b,c,d,e,f,g,s)) 
 
 def main():
-    
+    oplist=[1,2,3]
     print_categories(ctgs)
 
     a = print_menu()
+    while a in oplist:
+        
+        if a == '1':
+            a = modify_words()
+        
+        if a == '2':
+        
 
-    while a != '1' and a != '2' and a != '3':
+        if a == '3':
+            quit()
+        
+    if a not in oplist:
         print('\nWrong option!')
-        a = print_menu()
-
-    while a == '1':
-        a = modify_words()
-
-    if a == '3':
-        sys.exit()
         
 if __name__ == "__main__":
     main()
