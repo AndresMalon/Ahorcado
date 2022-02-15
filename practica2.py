@@ -46,7 +46,7 @@ def print_modify_options():
 def sel_error():
     print("Error! Choose a correct number")
     
-    return print_modify_options()
+    print_modify_options()
     
     
 ###ADD CATEGORY
@@ -61,7 +61,7 @@ def add():
             print("\nInvalid name, %s already exists in the catalogue"%ctg)
             print_categories(ctgs)
             
-        return print_category_options()
+        print_category_options()
 
 ###MODIFY CATEGORY
 #name
@@ -78,8 +78,6 @@ def change_name(dic):
         del ctgs[n1]
         print_categories(dic)
         
-    return print_modify_options()
-        
 #add word
 def add_word():
     c = input('Please introduce the category to be updated: ')
@@ -93,10 +91,8 @@ def add_word():
     else:
         print('\nError! That category does not exist in the catalogue')
         
-    return print_modify_options()
 
 #remove word
-##
 def remove_word():
     c = input('Please introduce the category to be updated: ')
     
@@ -109,8 +105,6 @@ def remove_word():
     else:
         print('\nError! That category does not exist in the catalogue')
         print_categories(ctgs)
-        
-    return print_modify_options()
 
 ###DELETE CATEGORY
 def delete_category():
@@ -127,39 +121,45 @@ def delete_category():
         print('\nError! That category does not exist in the catalogue\n')
         print_categories(ctgs)
         
-    return print_modify_options()
 
 #####MODIFY WORDS#######
 def modify_words():
-    sel = print_category_options()
     
-    while sel != 1 and sel != 2 and sel != 3 and sel != 4:
-        sel_error()
+    sellist = [1,2,3,4]
+    modlist = sellist
+    
+    sel = print_category_options()
+    while sel in sellist and sel != 4:
+        
+        if sel == 1:   
+            add()
+        
+        if sel == 2:
+            
+            mod = print_modify_options()
+            while mod in modlist and mod != 4:
+
+                if mod == 1:
+                    change_name(ctgs)
+            
+                if mod == 2:
+                    add_word()
+        
+                if mod == 3:
+                    remove_word()
+
+                mod = print_modify_options()
+            
+            if mod not in modlist:
+                sel_error()
+            
+        if sel == 3:
+            delete_category()
+            
         sel = print_category_options()
         
-    while sel == 1:   
-        sel = add()
-        
-    while sel == 2:
-        mod = print_modify_options()
-        
-        while mod != 1 and mod != 2 and mod != 3 and mod != 4:
-            mod = sel_error()
-            
-        while mod == 1:
-            mod = change_name(ctgs)
-            
-        while mod == 2:
-            mod = add_word()
-        
-        while mod == 3:
-            mod = remove_word()
-            
-        sel = print_category_options()        
-        
-            
-    while sel == 3:
-        sel = delete_category()
+    if sel not in sellist:
+        sel_error()
         
     return print_menu()
 def Play:
@@ -186,7 +186,23 @@ def Play:
     letterspos=dict()
     for l in  letters:
         
+def hangman(cont):
+    a = '---------'
+    b = '|';c = '|';d = '|';e = '|';f = '|'
+    g = '_'
     
+    if cont >= 1:
+        b = '|       |'
+    if cont >= 2:
+        c = '|       0'
+    if cont >= 3:
+        d = '|      \|/'
+    if cont >= 4:
+        e = '|       |'
+    if cont >= 5:
+        f = '|      / \\'
+    
+    print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(a,b,c,d,e,f,g))    
 
 def main():
     
