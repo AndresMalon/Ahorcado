@@ -163,10 +163,29 @@ def modify_words():
         
     return print_menu()
 def Play:
-    print ("Playing...\n ")
+      print ("Playing...\n ")
     print("Please choose one of the following options: \n")
     print("1 - The guessed word belongs to a certain category\n2 - Randomly from all bag of words\n")
     print("\n")
+    selecplay=int(input("Your choose:"))
+    if selecplay==1:
+        print ("Categories: ",ctgs.keys())
+        category=input("Please introduce the category")
+        wordslist=ctgs[category]
+        wordnum=random.randint(0,len(wordlist)-1)
+        word=wordslist[wordnum]
+    else:
+        #Random
+        catnum=random.randint(0,len(ctgs)-1)
+        wordnum=random.randint(0,len(ctgs[catnum])-1)
+        word=ctgs[catnum][wordnum]
+    
+    
+    ##Program
+    letters=set(word.split())
+    letterspos=dict()
+    for l in  letters:
+        
     
 
 def main():
