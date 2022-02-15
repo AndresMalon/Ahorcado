@@ -162,8 +162,8 @@ def modify_words():
         sel_error()
         
     return print_menu()
-def Play:
-      print ("Playing...\n ")
+def Play():
+    print ("Playing...\n ")
     print("Please choose one of the following options: \n")
     print("1 - The guessed word belongs to a certain category\n2 - Randomly from all bag of words\n")
     print("\n")
@@ -177,14 +177,21 @@ def Play:
     else:
         #Random
         catnum=random.randint(0,len(ctgs)-1)
-        wordnum=random.randint(0,len(ctgs[catnum])-1)
+        wordnum=random.randint(0,len(list(ctgs[catnum]))-1)
         word=ctgs[catnum][wordnum]
     
     
     ##Program
-    letters=set(word.split())
-    letterspos=dict()
-    for l in  letters:
+    errors=0
+    while errors<6:
+        let=input("Please guess a letter or word:")
+        if let in word:
+            word=showletter(word,let)
+            hangman(errors,word)
+        else:
+            errors+=1
+            hangman(errors,let)
+
         
 def hangman(cont,s):
     a = '---------'
