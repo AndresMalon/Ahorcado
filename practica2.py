@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb  8 19:23:53 2022
+Created on Tue Feb  8 10:23:53 2022
 
-@author: ander
+@author: Ander Aramburu,Ahmed Fayze and Andres Malon
 """
 import random,json
 
@@ -170,7 +170,7 @@ def Play():
     selecplay=int(input("Your choose:"))
     if selecplay==1:
         print ("Categories: ",ctgs.keys())
-        category=input("Please introduce the category")
+        category=input("Please introduce the category: ")
         wordslist=ctgs[category]
         wordnum=random.randint(0,len(wordlist)-1)
         word=wordslist[wordnum]
@@ -212,23 +212,21 @@ def hangman(cont,s):
     print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s\n'%(a,b,c,d,e,f,g,s)) 
 
 def main():
-    oplist=[1,2,3]
+    oplist=["1","2","3"]
     print_categories(ctgs)
 
     a = print_menu()
-    while a in oplist:
-        
-        if a == '1':
-            a = modify_words()
-        
-        if a == '2':
-        
-
-        if a == '3':
-            quit()
-        
     if a not in oplist:
         print('\nWrong option!')
+    else:
+        while a in oplist:
+
+            if a == "1":
+                a = modify_words()
+            if a == "2":
+                a= Play()
+            if a == "3":
+                sys.exit("The program is finish")
         
 if __name__ == "__main__":
     main()
