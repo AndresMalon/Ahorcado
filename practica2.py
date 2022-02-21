@@ -169,16 +169,22 @@ def Play():
     print("\n")
     selecplay=int(input("Your choose:"))
     if selecplay==1:
-        print ("Categories: ",ctgs.keys())
-        category=input("Please introduce the category: ")
-        wordslist=ctgs[category]
-        wordnum=random.randint(0,len(wordlist)-1)
-        word=wordslist[wordnum]
+        print ("Categories: ",ctgs.keys())##Print all the categories
+        category=input("Please introduce the category: ")#The user select a certain category
+        categorylist=list(ctgs.keys())
+        if category in categorylist:
+            wordslist  = ctgs[category]#We get all values of the specific category
+            wordnum = random.randint(0,len(wordslist)-1)
+            word = wordslist[wordnum]#We obtain the word that we use for the game 
+        else:
+            print(ctgs[category])
+            raise KeyError("This category is not exist")
+                        
     else:
         #Random
-        catnum=random.randint(0,len(ctgs)-1)
-        wordnum=random.randint(0,len(list(ctgs[catnum]))-1)
-        word=ctgs[catnum][wordnum]
+        catnum = random.randint(0,len(ctgs)-1)
+        wordnum = random.randint(0,len(list(ctgs[catnum]))-1)
+        word = ctgs[catnum][wordnum]
     
     
     ##Program
