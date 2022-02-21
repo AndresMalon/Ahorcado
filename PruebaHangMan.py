@@ -254,13 +254,13 @@ def Play():
                             second_err = '|';third_err = '|';fourth_err = '|';fifth_err = '|';sixth_err = '|'
                             if errors >= 1:
                                 second_err = '|       |'
-                            elif errors >= 2:
+                            if errors >= 2:
                                 third_err = '|       0'
-                            elif errors >= 3:
+                            if errors >= 3:
                                 fourth_err = '|      \|/'
-                            elif errors >= 4:
+                            if errors >= 4:
                                 fifth_err = '|       |'
-                            elif errors >= 5:
+                            if errors >= 5:
                                 sixth_err = '|      / \\'
                             
                             print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(first_error,second_err,third_err,fourth_err,fifth_err,sixth_err,letter))
