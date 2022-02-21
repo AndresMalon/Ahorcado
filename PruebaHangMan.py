@@ -18,9 +18,13 @@ with open('words.json') as f:
     words = f.read()
 ctgs = json.loads(words)
 
+#This function 
 def intro():
     print("Welcome to the Hang Man Game!")
-    
+#This function is used to print the Main Menu 
+#Option 1 is Modify Words.The user has the chance to manage the collections of words.The user can add,delete and modify categories 
+#Option 2 The user plays the HangMan game.The user can select a certain category of the word or it can play with any value of the dictionary.
+#Option 3 The program will terminate normally.
 def print_menu():
     print("\nPlease choose one of the following options:")
     print("1 - Modify words\n2 - Play\n3 - Exit")
@@ -33,7 +37,7 @@ def print_categories(s):
     for i in ctgs:
         print(i,end = " ")
     print("\n")
-    
+#This function is used to print the different options that can do the user with categories of the dictionary
 def print_category_options():
     print("\nPlease choose one of the following options: ")
     print("1 - Add category\n2 - Modify category\n3 - Delete category\n4 - Return to Main Menu")
@@ -51,7 +55,6 @@ def print_modify_options():
 
 def sel_error():
     print("Error! Choose a correct number")
-    
     print_modify_options()
     
     
@@ -70,24 +73,22 @@ def add():
         print_category_options()
 
 ###MODIFY CATEGORY
-#name
 def change_name(dic):
-    n1=input('Please introduce the category name you want to change: ')
+    name = input('Please introduce the category name you want to change: ')
     
-    if n1 not in dic:
+    if name not in dic:
         print('This category does not exist in the catalogue')
         print_categories(dic)
                 
     else:
-        n2=input('Now write the name you want for it: ')
-        ctgs[n2] = ctgs[n1]
-        del ctgs[n1]
+        newname=input('Now write the name you want for it: ')
+        ctgs[newname] = ctgs[name]
+        del ctgs[name]
         print_categories(dic)
         
 #add word
 def add_word():
     c = input('Please introduce the category to be updated: ')
-    
     if c in ctgs:
         n = input('Add the new candidate word to the category: ')
         if n not in ctgs[c]:
@@ -169,118 +170,98 @@ def modify_words():
         
     return print_menu()
 
-# def hangman(cont,s):
-    
-#     a = '---------'
-#     b = '|';c = '|';d = '|';e = '|';f = '|'
-#     g = '_'
-    
-#     if cont >= 1:
-#         b = '|       |'
-#     if cont >= 2:
-#         c = '|       0'
-#     if cont >= 3:
-#         d = '|      \|/'
-#     if cont >= 4:
-#         e = '|       |'
-#     if cont >= 5:
-#         f = '|      / \\'
-    
-#     print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(a,b,c,d,e,f,g,s))    
-
 def Play():
     while True:
-        
         print ("Playing...\n ")
         print("Please choose one of the following options: \n")
         print("1 - The guessed word belongs to a certain category\n2 - Randomly from all bag of words\n")
         print("\n")
-        selecplay=int(input("Your choose:"))
+        selecplay = int(input("Your choose:"))
         while selecplay not in [1,2]:
             selecplay = int(input("Please choose between 1 and 2: "))
             print("\n")
-            
-            
-        if selecplay==1:
+        if selecplay == 1:
             print ("Categories: ",ctgs.keys())#Print all the categories
             category = input("Please introduce the category: ")#The user select a certain category
             categorylist=list(ctgs.keys())
             while category not in categorylist:
                 print("This category is not exists\n ")
                 category = input("Please introduce the category: ")
+                
             if category in categorylist:
                 wordslist  = ctgs[category]#We get all values of the specific category
+                
                 word = random.choice(wordslist)#We obtain the word that we use for the game
                 
         else:
-            #Random word from all the words of the diccinary
+            #Random word from all the words of the dictionary
             wordslist = []
             for category in ctgs:
                 for word in ctgs[category]:
                     wordslist.append(word)
             word = random.choice(wordslist)
-            print (word)
+            
         WORD=word
         word=word.lower()
         word=list(word)
-
-        ##Program
+        
         errors=0
+        first_error = '---------'
+        second_err = '|';third_err = '|';fourth_err = '|';fifth_err = '|';sixth_err = '|'
+        g = "___"
         progress = []
-        progress='_ '*len(word)
+        progress = '_ '*len(word)
+        print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(first_error,second_err,third_err,fourth_err,fifth_err,sixth_err,g))
+                
         print(progress)
         
-        
-        while '_' in progress and errors<5:
+        while '_' in progress and errors <= 6:
             letter=input('Please guess a letter or word: ')
-                    
-            if letter==''.join(word):
-                progress=[]
+            if letter == ''.join(word):
+                progress = []
             else:
-                    # Here, we have made the program for changing the low lines by
-                        # the correct letters 
-                 if letter in word:
-                     index=0
-                     progress=list(progress)  
-                     while index<len(word):
-                         if word[index]==letter:
-                             progress[index*2]=letter
-                             index+=1
-                         else:
-                            errors+=1
-                            print(letter,'is not correct. \n')
+                # Here, we have made the program for changing the low lines by
+                # the correct letters 
+                if letter in word:
+                    index = 0
+                    progress = list(progress)
+                    while index<len(word):
+                        if word[index] == letter:
+                            progress[index*2] = letter
+                        index += 1
+                    print(''.join(progress))
+                else:
+                        errors += 1
+                        print(letter,'is not correct. \n')
+                
+                if errors >= 1:
+                    first_error = '|       |'
+                if errors >= 2:
+                    second_err = '|       0'
+                if errors >= 3:
+                    third_err = '|      \|/'
+                if errors >= 4:
+                    fourth_err = '|       |'
+                if errors == 5:
+                    fifth_err = '|      /'
+                if errors == 6:
+                    sixth_err = '|      \\'
                             
-                            first_error = '---------'
-                            second_err = '|';third_err = '|';fourth_err = '|';fifth_err = '|';sixth_err = '|'
-                            if errors >= 1:
-                                second_err = '|       |'
-                            if errors >= 2:
-                                third_err = '|       0'
-                            if errors >= 3:
-                                fourth_err = '|      \|/'
-                            if errors >= 4:
-                                fifth_err = '|       |'
-                            if errors >= 5:
-                                sixth_err = '|      / \\'
-                            
-                            print('%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(first_error,second_err,third_err,fourth_err,fifth_err,sixth_err,letter))
-                            
-                            
-                            
-        if errors<6:
+                print('%s\n%s\n%s\n%s\n%s%s\n%s\n%s'%(first_error,second_err,third_err,fourth_err,fifth_err,sixth_err,g,letter))
+                print(''.join(progress))
+                        
+        if errors <= 6 or letter == word:
             print('You win. The word is',WORD,'.')
             print("\n")
-            break
         else:
-            print('Sorry, you ran out of tries. The word was',word,'. Maybe next time!')
+            print('Sorry, you ran out of tries. The word was',WORD,'. Maybe next time!')
             print("\n")
-            break
+        break
 
 
 def main():
-    oplist=["1","2","3"]
+    oplist = ["1","2","3"]
     print_categories(ctgs)
-
     a = print_menu()
     if a not in oplist:
         print('\nWrong option!')
