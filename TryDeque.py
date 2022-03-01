@@ -61,3 +61,23 @@ def menu():
         op = int(input("1.Add to the front\n\n2.Add to the back\n\n3.Remove from the front\n\n"
                "4.Remove from the back\n\n5.Is deque empty?\n\n6.Size of Deque\n\n"
                "7.Display content of the Deque\n\n8.Exit\n"))
+
+        
+        
+    
+def Check_balance(a):
+    s=Stack()
+    check={')':'(', ']':'[', '}':'{'}
+    for i in range(0,len(a)):
+        if a[i]=='(' or a[i]=='[' or a[i]=='{':
+            s.push(a[i])
+        elif a[i]==')' or a[i]=='}' or a[i]==']':
+            if check[a[i]]==s.pop():
+                print()
+            else:
+                print('Not balanced')
+                sys.exit(0)
+    if  s.isEmpty():
+        return True
+    else:
+        return False
